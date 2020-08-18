@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: provider
+server:
+  port: 81
+eureka:
+  client:
+    service-url:
+      # 设置服务注册中心的URL，用于client和server端交流
+      defaultZone: http://@eureka1.com:7001/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint: #配置可以远程关闭
+    shutdown:
+      enabled: true

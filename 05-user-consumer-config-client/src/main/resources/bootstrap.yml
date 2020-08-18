@@ -1,0 +1,72 @@
+spring:
+  application:
+    name: user-consumer
+
+  zipkin:
+    base-url: http://localhost:9411
+  sleuth:
+    sampler:
+      rate: 1
+  ## admin UI config
+  boot:
+    admin:
+      client:
+        url: http://localhost:8080
+  ############## config center #################
+  cloud:
+    config:
+      #      uri: http://localhost:9999/ #fetch local server
+      profile: dev
+      label: dev # git branch
+      discovery: # enable
+        enabled: true
+        service-id: config-center # represents config-center's application name
+  #myconfig=xxxx v1 # this entry is not on local env, but it just like
+  ################### bus ######################
+  rabbitmq:
+    host: localhost
+    port: 5672 # 5672 differs to web interface's 15672
+    username: guest
+    password: guest
+
+
+server:
+  port: 91
+eureka:
+  client:
+    service-url:
+      # 设置服务注册中心的URL，用于client和server端交流
+      defaultZone: http://eureka1.com:7001/eureka/
+
+# 自定义负载策略，优先级大于启动类中的Bean
+#provider:
+#  ribbon:
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule
+#关闭eureka，不走ribbon负载，只用80的负载
+ribbon:
+  #  eureka:
+  #    enabled: false # 关闭负载
+  #  listOfServers: localhost:80
+
+  ## 所有容错的机制全部基于客户端，比如一个消费方
+  ConnectionTimeout: 1000 # 建立连接超时时间
+  ReadTimeout: 3000 # 业务逻辑响应超时时间，模拟如下：consumer调用provider，所以在provider中的方法设置一个sleep
+  MaxAutoRetries: 3 #同一台实例最大重试次数，不包括首次
+  MaxAutoRetriesNextServer: 3 #重试其他负载最大重试次数
+  OkToRetryOnAllOperation: false #是否所有操作都重试？一般post重试容易出问题，所以不会全部重试
+
+feign:
+  hystrix:
+    enabled: true #开启feign远程调用失败时的错误处理
+
+# actuator's endpoints
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+
+

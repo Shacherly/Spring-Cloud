@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: consumer
+server:
+  port: 90
+eureka:
+  client:
+    service-url:
+      # 设置服务注册中心的URL，用于client和server端交流
+      defaultZone: http://eureka1.com:7001/eureka/
+
+# 自定义负载策略，优先级大于启动类中的Bean
+provider:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule
+#关闭eureka，不走ribbon负载，只用80的负载
+#ribbon:
+#  eureka:
+#    enabled: false # 关闭负载
+#  listOfServers: localhost:80

@@ -1,0 +1,57 @@
+#spring:
+#  profiles:
+#    active: euk1 ## 激活某个环境
+spring:
+  application:
+    name: EurekaServer
+  boot:
+    admin:
+      client:
+        url: http://localhost:8080
+  #  security:
+  #    user:
+  #      name: admin
+  #      password: admin
+
+  #关闭自我保护
+eureka:
+  server:
+    enable-self-preservation: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+
+
+
+---
+spring:
+  profiles: euk1
+server:
+  port: 7001
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka1.com:7001/eureka/
+    register-with-eureka: false # 自己注册自己，默认true，改为false，因为当前自己不用注册自己
+    fetch-registry: false # 从eureka server获取注册信息，由于单节点，不需要同步其他节点数据，用false
+  instance:
+    hostname: eureka1.com
+
+---
+spring:
+  profiles: euk2
+server:
+  port: 7002
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka2.com:7002/eureka/
+  instance:
+    hostname: eureka2.com
+
