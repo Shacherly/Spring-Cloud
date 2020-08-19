@@ -11,7 +11,7 @@
     <groupId>org.apache</groupId>
     <artifactId>03-eureka-consumer</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>eureka-consumer</name>
+    <name>03-eureka-consumer</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>

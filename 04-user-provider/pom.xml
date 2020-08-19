@@ -11,7 +11,7 @@
     <groupId>com.ms</groupId>
     <artifactId>04-user-provider</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>user-provider</name>
+    <name>04-user-provider</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>

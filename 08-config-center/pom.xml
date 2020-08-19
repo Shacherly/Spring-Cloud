@@ -5,7 +5,7 @@
     <groupId>org.c</groupId>
     <artifactId>08-config-center</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>config-center</name>
+    <name>08-config-center</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>

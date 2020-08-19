@@ -5,7 +5,7 @@
     <groupId>org.a</groupId>
     <artifactId>07-admin</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>admin</name>
+    <name>07-admin</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
