@@ -11,7 +11,7 @@
     <groupId>com.th</groupId>
     <artifactId>05-user-consumer</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>05-user-consumer</name>
+    <name>05-user-consumer-config</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
