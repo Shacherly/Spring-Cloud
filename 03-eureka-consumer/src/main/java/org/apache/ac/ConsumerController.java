@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Random;
 
 @RestController
-public class MainController {
+public class ConsumerController {
     @Value("${server.port}")
     String port;
     @Autowired
@@ -25,6 +25,7 @@ public class MainController {
     // @Qualifier("eurekaClient")
     @Autowired
     EurekaClient eurekaClient;
+    // 如果要使用多个负载客户端，就用这个来调用，用上面的调用不行
     @Autowired
     LoadBalancerClient lb;
 
@@ -54,6 +55,7 @@ public class MainController {
         List<InstanceInfo> instances = eurekaClient.getInstancesByVipAddress("provider", false);
         instances.forEach(System.out::println);
 
+        String respStr = "";
         if (instances.size() > 0) {
             InstanceInfo instanceInfo = instances.get(0);
             if (instanceInfo.getStatus() == InstanceInfo.InstanceStatus.UP) {
@@ -62,15 +64,16 @@ public class MainController {
                 System.out.println(url);
 
                 RestTemplate restTemplate = new RestTemplate();
-                String respStr = restTemplate.getForObject(url, String.class);
-                System.out.println("resp: " + respStr);// resp: hi
+                respStr = restTemplate.getForObject(url, String.class);
+                System.out.println("RPC resp: " + respStr);// resp: hi
             }
         }
-        return "xxxx";
+        return respStr;
     }
 
     @GetMapping("/client5")
     public Object client5() {
+
         // lb会帮我们过滤掉不可用的服务，而不用我们自己去获取状态然后判断，过滤DOWN的服务
         ServiceInstance instance = lb.choose("provider");
         String url = "http://" + instance.getHost() + ":"
@@ -79,7 +82,7 @@ public class MainController {
         RestTemplate restTemplate = new RestTemplate();
         String respStr = restTemplate.getForObject(url, String.class);
         System.out.println("resp: " + respStr);// resp: hi
-        return "ib activate";
+        return "ib activate port -->> " + instance.getPort();
     }
 
     @Autowired
@@ -100,7 +103,7 @@ public class MainController {
     }
 
     /**
-     * 手动负载均衡，就不需要Eureka了，直接DiscoveryClient
+     * 自定义负载均衡，就不需要Eureka了，直接DiscoveryClient
      * @return
      */
     @GetMapping("/client7")

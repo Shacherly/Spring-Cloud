@@ -2,12 +2,14 @@
 #  profiles:
 #    active: euk1 ## 激活某个环境
 spring:
+  profiles:
+    active: euk1
   application:
     name: EurekaServer
-  boot:
-    admin:
-      client:
-        url: http://localhost:8080
+#  boot:
+#    admin:
+#      client:
+#        url: http://localhost:8080
   #  security:
   #    user:
   #      name: admin
@@ -16,7 +18,7 @@ spring:
   #关闭自我保护
 eureka:
   server:
-    enable-self-preservation: false
+    enable-self-preservation: true
 
 management:
   endpoints:

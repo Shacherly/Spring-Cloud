@@ -34,9 +34,8 @@ public class EurekaConsumerApplication {
      */
     @Bean
     public IRule myRule() {
-        // return new RoundRobinRule();
+        return new RoundRobinRule();
         // return new RandomRule();
-        return new RandomRule();
     }
 
 }
