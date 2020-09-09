@@ -10,7 +10,7 @@ import java.io.IOException;
 public class HttpRequestInterceptor implements ClientHttpRequestInterceptor {
     @Override
     public ClientHttpResponse intercept(HttpRequest httpRequest, byte[] bytes, ClientHttpRequestExecution clientHttpRequestExecution) throws IOException {
-        System.out.println("拦截到：" + httpRequest.getURI());
+        System.out.println("[HttpRequestInterceptor]拦截到：" + httpRequest.getURI());
         ClientHttpResponse response = clientHttpRequestExecution.execute(httpRequest, bytes);
 
         return response;

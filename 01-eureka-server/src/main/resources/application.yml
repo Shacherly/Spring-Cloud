@@ -3,17 +3,17 @@
 #    active: euk1 ## 激活某个环境
 spring:
   profiles:
-    active: euk1
+    active: dev
   application:
-    name: EurekaServer
-#  boot:
-#    admin:
-#      client:
-#        url: http://localhost:8080
-  #  security:
-  #    user:
-  #      name: admin
-  #      password: admin
+    name: EurekaServer-myself
+    boot:
+      admin:
+        client:
+          url: http://localhost:8080
+      security:
+        user:
+          name: admin
+          password: admin
 
   #关闭自我保护
 eureka:
@@ -33,27 +33,38 @@ management:
 
 ---
 spring:
-  profiles: euk1
+  profiles: prod
 server:
   port: 7001
 eureka:
   client:
     service-url:
-      defaultZone: http://eureka1.com:7001/eureka/
+      defaultZone: http://60.188.58.167:7001/eureka/
     register-with-eureka: false # 自己注册自己，默认true，改为false，因为当前自己不用注册自己
     fetch-registry: false # 从eureka server获取注册信息，由于单节点，不需要同步其他节点数据，用false
   instance:
-    hostname: eureka1.com
-
+    hostname: 60.188.58.167
+    ip-address: 60.188.58.167
+    prefer-ip-address: true
+    instance-id: ${eureka.instance.ip-address}:${spring.application.name}:${spring.application.instance_id:${server.port}}
 ---
 spring:
-  profiles: euk2
+  profiles: dev
 server:
-  port: 7002
+  port: 7001
 eureka:
   client:
     service-url:
-      defaultZone: http://eureka2.com:7002/eureka/
+      defaultZone: http://192.168.37.131:7001/eureka/
+    # 自己注册自己可以测试看看自己的服务接口是hostname还是ip
+    register-with-eureka: true # 自己注册自己，默认true，可以为false，因为当前自己不用注册自己
   instance:
     hostname: eureka2.com
+    ip-address: 192.168.37.131
+    prefer-ip-address: true
+    # 默认eureka.instance.instance-id 属性的配置是:
+    # ${spring.cloud.client.hostname}:${spring.application.name}:${spring.application.instance_id:${server.port}}
+    # 如果只是配置了eureka.instance.prefer-ip-address=true，不配置 eureka.instance.instance-id
+    # 那还是显示 hostname，但 IP地址是可以访问的，因为IP始终都可以访问
+    instance-id: ${eureka.instance.ip-address}:${spring.application.name}:${spring.application.instance_id:${server.port}}
 

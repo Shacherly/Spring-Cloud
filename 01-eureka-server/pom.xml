@@ -10,7 +10,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.apache</groupId>
-    <artifactId>eureka-server</artifactId>
+    <artifactId>01-eureka-server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>01-eureka-server</name>
     <description>Demo project for eureka server</description>

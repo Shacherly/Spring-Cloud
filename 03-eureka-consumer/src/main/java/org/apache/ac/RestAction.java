@@ -30,11 +30,18 @@ public class RestAction {
     @Autowired
     RestTemplate restTemplate;
 
+
+    /**
+     * 真正调用远程服务接口的
+     * @param id
+     * @return
+     */
     @GetMapping(value = "/rest1/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Object rest1(@PathVariable("id") Long id) {
-        // String url = "http://provider/map";
-        String url = "http://provider/person/" + id;
-        Person respStr = restTemplate.getForObject(url, Person.class, id);
+        String url = "http://provider/map";
+        // String url = "http://provider/person/" + id;
+        // Person respStr = restTemplate.getForObject(url, Person.class, id);
+        Map respStr = restTemplate.getForObject(url, Map.class);
 
         ResponseEntity<Person> entity = restTemplate.getForEntity(url, Person.class, id);
         System.out.println(respStr);

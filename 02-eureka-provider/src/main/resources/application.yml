@@ -1,13 +1,10 @@
 spring:
+  profiles:
+    active: dev
   application:
-    name: provider
+    name: eureka-provider
 server:
   port: 82
-eureka:
-  client:
-    service-url:
-      # 设置服务注册中心的URL，用于client和server端交流
-      defaultZone: http://@eureka1.com:7001/eureka/
 
 management:
   endpoints:
@@ -17,3 +14,37 @@ management:
   endpoint: #配置可以远程关闭
     shutdown:
       enabled: true
+
+---
+spring:
+  profiles: prod
+server:
+  port: 81
+
+eureka:
+  client:
+    service-url:
+      # 设置服务注册中心的URL，用于client和server端交流
+      # #此节点应向其他节点发起请求，填写别的节点的ip
+      defaultZone: http://@60.188.58.167:7001/eureka/
+  instance:
+    hostname: 60.188.58.167
+    ip-address: 60.188.58.167
+    prefer-ip-address: true
+    instance-id: ${eureka.instance.ip-address}:${spring.application.name}:${spring.application.instance_id:${server.port}}
+
+---
+spring:
+  profiles: dev
+server:
+  port: 82
+eureka:
+  client:
+    service-url:
+      # 设置服务注册中心的URL，用于client和server端交流
+      defaultZone: http://localhost:7001/eureka/
+  instance:
+    hostname: six66 # 不关键，如果ip-address有显示标注，则hostname就是ip-address，否则会显示这里配置的hostname,如果去掉则显示真正的主机名
+    ip-address: 192.168.37.131
+    prefer-ip-address: true
+    instance-id: ${eureka.instance.ip-address}:${spring.application.name}:${spring.application.instance_id:${server.port}}

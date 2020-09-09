@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import java.util.List;
 import java.util.Random;
 
@@ -44,15 +46,16 @@ public class ConsumerController {
 
     @ResponseBody
     @GetMapping("/client2")
+    @Produces(MediaType.APPLICATION_JSON)
     public Object client2(HttpServletResponse response) {
         response.setContentType("application/json");
-        return discoveryClient.getInstances("provider");
+        return discoveryClient.getInstances("eureka-provider");
     }
 
     @GetMapping("/client4")
     public Object client4() {
         // List<InstanceInfo> instances = eurekaClient.getInstancesById("HP-NightElf:provider:80");
-        List<InstanceInfo> instances = eurekaClient.getInstancesByVipAddress("provider", false);
+        List<InstanceInfo> instances = eurekaClient.getInstancesByVipAddress("eureka-provider", false);
         instances.forEach(System.out::println);
 
         String respStr = "";
@@ -75,7 +78,9 @@ public class ConsumerController {
     public Object client5() {
 
         // lb会帮我们过滤掉不可用的服务，而不用我们自己去获取状态然后判断，过滤DOWN的服务
-        ServiceInstance instance = lb.choose("provider");
+        ServiceInstance instance = lb.choose("eureka-provider");
+        System.out.println(instance);
+
         String url = "http://" + instance.getHost() + ":"
                 + instance.getPort() + "/get";
         System.out.println(url);
@@ -94,7 +99,8 @@ public class ConsumerController {
      */
     @GetMapping("/client6")
     public Object client6() {
-        ServiceInstance instance = lb.choose("provider");
+        ServiceInstance instance = lb.choose("eureka-provider");
+        System.out.println(instance);
         String url = "http://" + instance.getHost() + ":"
                 + instance.getPort() + "/get";
         String respStr = restTemplate.getForObject(url, String.class);
@@ -108,7 +114,7 @@ public class ConsumerController {
      */
     @GetMapping("/client7")
     public Object client7() {
-        List<ServiceInstance> instances = discoveryClient.getInstances("provider");
+        List<ServiceInstance> instances = discoveryClient.getInstances("eureka-provider");
         // 自定义轮询算法
         int next = new Random().nextInt(instances.size());
         ServiceInstance instance = instances.get(next);
@@ -126,7 +132,7 @@ public class ConsumerController {
     @GetMapping("/client9")
     public Object client9() {
         // 自动处理URL
-        String url = "http://provider/get";
+        String url = "http://mufasa:82/get";
         String respStr = restTemplate.getForObject(url, String.class);
 
         System.out.println(respStr);

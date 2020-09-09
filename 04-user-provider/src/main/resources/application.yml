@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: prod
   application:
     name: user-provider
   zipkin:
@@ -9,13 +11,22 @@ spring:
 
 server:
   port: 81
+
+
+---
+spring:
+  profiles: dev
 eureka:
   client:
     service-url:
       # 设置服务注册中心的URL，用于client和server端交流
       defaultZone: http://eureka1.com:7001/eureka/
-
-
-
-
+---
+spring:
+  profiles: prod
+eureka:
+  client:
+    service-url:
+      # 设置服务注册中心的URL，用于client和server端交流
+      defaultZone: http://60.188.58.167:7001/eureka/
 
