@@ -2,6 +2,7 @@
 #  profiles:
 #    active: euk1 ## 激活某个环境
 
+
 spring:
   profiles:
     active: dev3
