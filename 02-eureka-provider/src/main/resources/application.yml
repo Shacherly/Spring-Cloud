@@ -31,7 +31,7 @@ eureka:
     hostname: 60.188.58.167
     ip-address: 60.188.58.167
     prefer-ip-address: true
-    instance-id: ${eureka.instance.ip-address}:${spring.application.name}:${spring.application.instance_id:${server.port}}
+    instance-id: ${eureka.instance.ip-address}:${spring.application.name}:${server.port}
 
 ---
 spring:
