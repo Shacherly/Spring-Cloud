@@ -1,6 +1,6 @@
 package com.t;
 
-import com.h.Person;
+import com.hhhh.Person;
 import feign.FeignException;
 import feign.hystrix.FallbackFactory;
 import org.springframework.stereotype.Component;

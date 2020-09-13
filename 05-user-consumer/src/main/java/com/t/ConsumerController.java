@@ -1,8 +1,6 @@
 package com.t;
 
-import com.h.Person;
-import com.netflix.discovery.converters.Auto;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.hhhh.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;

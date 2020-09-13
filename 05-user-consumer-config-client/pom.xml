@@ -35,7 +35,7 @@
 
         <!--引入自定义API，那我原来那个API就不用写了-->
         <dependency>
-            <groupId>com.h</groupId>
+            <groupId>com.hhhh</groupId>
             <artifactId>06-user-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>

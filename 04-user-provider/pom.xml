@@ -31,7 +31,7 @@
 
         <!--引入自定义API，-->
         <dependency>
-            <groupId>com.h</groupId>
+            <groupId>com.hhhh</groupId>
             <artifactId>06-user-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
