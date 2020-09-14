@@ -8,14 +8,14 @@ spring:
     active: dev3
   application:
     name: EurekaServer-myself
-#    boot:
-#      admin:
-#        client:
-#          url: http://localhost:8080
-#      security:
-#        user:
-#          name: admin
-#          password: admin
+  boot:
+    admin:
+      client:
+        url: http://localhost:7003
+    security:
+      user:
+        name: admin
+        password: admin
 
   #关闭自我保护
 eureka:
