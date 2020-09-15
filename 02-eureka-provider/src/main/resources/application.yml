@@ -4,7 +4,7 @@ spring:
   application:
     name: eureka-provider
 server:
-  port: 82
+  port: 81
 
 management:
   endpoints:
@@ -37,7 +37,7 @@ eureka:
 spring:
   profiles: dev
 server:
-  port: 82
+  port: 81
 eureka:
   client:
     service-url:

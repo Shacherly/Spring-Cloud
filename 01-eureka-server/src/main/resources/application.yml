@@ -5,7 +5,7 @@
 
 spring:
   profiles:
-    active: dev3
+    active: dev1
   application:
     name: EurekaServer-myself
   boot:
