@@ -5,7 +5,7 @@
 
 spring:
   profiles:
-    active: dev1
+    active: dev3
   application:
     name: EurekaServer-myself
   boot:
@@ -99,7 +99,7 @@ eureka:
   instance:
     hostname: eureka1
     ip-address: eureka1
-    prefer-ip-address: false # 单机模拟高可用的注册中心需要把这个关掉，且需要使用hsotname，否则这个解析出来是同一个IP服务将不可用
+    prefer-ip-address: false # 单机模拟高可用（也就是单机启动多台服务）的注册中心需要把这个关掉，且需要使用hostname，否则这个解析出来是同一个IP服务将不可用
     # 默认eureka.instance.instance-id 属性的配置是:
     # ${spring.cloud.client.hostname}:${spring.application.name}:${spring.application.instance_id:${server.port}}
     # 如果只是配置了eureka.instance.prefer-ip-address=true，不配置 eureka.instance.instance-id
