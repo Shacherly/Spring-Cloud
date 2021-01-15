@@ -5,7 +5,7 @@
 
 spring:
   profiles:
-    active: dev3
+    active: dev2
   application:
     name: EurekaServer-myself
   boot:
@@ -41,12 +41,12 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: http://60.188.58.167:7001/eureka/
+      defaultZone: http://www.desolator.cn:7001/eureka/
     register-with-eureka: true # 自己注册自己，默认true，改为false，单节点自己不用注册自己
     fetch-registry: true # 从eureka server获取注册信息，单节点不需要同步其他节点数据，用false
   instance:
-    hostname: 60.188.58.167
-    ip-address: 60.188.58.167
+    hostname: www.desolator.cn
+    ip-address: www.desolator.cn
     prefer-ip-address: true
     instance-id: ${eureka.instance.ip-address}:${spring.application.name}:${server.port}
 ---
@@ -57,12 +57,12 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: http://60.188.58.167:7002/eureka/
+      defaultZone: http://www.desolator.cn:7002/eureka/
     register-with-eureka: false # 自己注册自己，默认true，改为false，因为当前自己不用注册自己
     fetch-registry: true # 从eureka server获取注册信息，由于单节点，不需要同步其他节点数据，用false
   instance:
-    hostname: 60.188.58.167
-    ip-address: 60.188.58.167
+    hostname: www.desolator.cn
+    ip-address: www.desolator.cn
     prefer-ip-address: true
     instance-id: ${eureka.instance.ip-address}:${spring.application.name}:${server.port}
 ---
@@ -73,12 +73,12 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: http://60.188.58.167:7002/eureka/
+      defaultZone: http://www.desolator.cn:7002/eureka/
     register-with-eureka: false # 自己注册自己，默认true，改为false，因为当前自己不用注册自己
     fetch-registry: true # 从eureka server获取注册信息，由于单节点，不需要同步其他节点数据，用false
   instance:
-    hostname: 60.188.58.167
-    ip-address: 60.188.58.167
+    hostname: www.desolator.cn
+    ip-address: www.desolator.cn
     prefer-ip-address: true
     instance-id: ${eureka.instance.ip-address}:${spring.application.name}:${server.port}
 
@@ -104,7 +104,7 @@ eureka:
     # ${spring.cloud.client.hostname}:${spring.application.name}:${spring.application.instance_id:${server.port}}
     # 如果只是配置了eureka.instance.prefer-ip-address=true，不配置 eureka.instance.instance-id
     # 那还是显示 hostname，但 IP地址是可以访问的，因为IP始终都可以访问
-    instance-id: ${eureka.instance.ip-address}:${spring.application.name}:${server.port}
+    instance-id: ${spring.application.name}:${eureka.instance.ip-address}:${server.port}
 ---
 spring:
   profiles: dev2
@@ -119,7 +119,7 @@ eureka:
     hostname: eureka2
     ip-address: eureka2
     prefer-ip-address: false
-    instance-id: ${eureka.instance.ip-address}:${spring.application.name}:${server.port}
+    instance-id: ${spring.application.name}:${eureka.instance.ip-address}:${server.port}
 ---
 spring:
   profiles: dev3
@@ -134,5 +134,5 @@ eureka:
     hostname: eureka3
     ip-address: eureka3
     prefer-ip-address: false
-    instance-id: ${eureka.instance.ip-address}:${spring.application.name}:${server.port}
+    instance-id: ${spring.application.name}:${eureka.instance.ip-address}:${server.port}
 

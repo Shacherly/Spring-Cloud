@@ -25,7 +25,7 @@ eureka:
   client:
     service-url:
       # 设置服务注册中心的URL，用于client和server端交流
-      # #此节点应向其他节点发起请求，填写别的节点的ip
+      # 此节点应向其他节点发起请求，填写别的节点的ip
       defaultZone: http://@60.188.58.167:7001/eureka/
   instance:
     hostname: 60.188.58.167
